@@ -1,19 +1,43 @@
 .button-container {
     margin: 0 auto;
+    font-size: 0;
     width: 300px;
 }
 
-.button-container-button {
+.button {
     height: 100px;
     width: 100px;
+    margin: 20px;
     border-radius: 50%;
     outline: none;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.pressed {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+}
+
+.clicked {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 1);
 }
 
 .draggable {
+    display: inline-block;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.draggable-button {
     background-color: lightseagreen;
 }
 
-.extended {
+.extended-button {
     background-color: darkred;
 }
