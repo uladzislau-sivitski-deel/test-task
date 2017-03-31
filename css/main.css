@@ -1,0 +1,19 @@
+.button-container {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.button-container-button {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    outline: none;
+}
+
+.draggable {
+    background-color: lightseagreen;
+}
+
+.extended {
+    background-color: darkred;
+}
