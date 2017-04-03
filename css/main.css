@@ -68,6 +68,10 @@
    *::-ms-backdrop, .control-button::before { left: -7px } /* IE11 */
  }
 
+ @-moz-document url-prefix() {
+   .control-button::before { left: -6px; top: -7px } /*FF*/
+}
+
 .extended{
   top: 0 !important;
   left: 0 !important;
