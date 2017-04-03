@@ -48,22 +48,25 @@
   width: 20px;
   margin: 2px;
 }
+.control-button:before{
+  font-size: 18px;
+  position: relative;
+  top: -6px;
+  left: -5px;
+}
 
 .close-button::before{
   content: "\2716";
-  font-size: 18px;
-  position: relative;
-  top: -6px;
-  left: -5px;
-
 }
 .extend-button::before{
   content: "\2750";
-  font-size: 18px;
-  position: relative;
-  top: -6px;
-  left: -5px;
+
 }
+@media all and (-ms-high-contrast:none)
+   {
+   .control-button::before { left: -7px } /* IE10 */
+   *::-ms-backdrop, .control-button::before { left: -7px } /* IE11 */
+ }
 
 .extended{
   top: 0 !important;

@@ -21,7 +21,9 @@ function Draggable() {}
 
 Draggable.prototype.createAndAppendNode = function() {
   this.node = document.createElement('div');
-  this.node.classList.add('draggable', 'item');
+  //classList.add(class1, class2) don't work in IE
+  this.node.classList.add('draggable');
+  this.node.classList.add('item');
   document.querySelector('.content-container').appendChild(this.node);
 
   this.applyDraggableBehaviour();
@@ -32,6 +34,14 @@ Draggable.prototype.createAndAppendNode = function() {
 
 Draggable.prototype.closeButtonBehavior = function() {
   var node = this.node;
+  //polyfill for remove in IE
+  if (!('remove' in Element.prototype)) {
+    Element.prototype.remove = function() {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
   this.closeButton.addEventListener('click', function() {
     node.remove();
   });
@@ -39,7 +49,8 @@ Draggable.prototype.closeButtonBehavior = function() {
 
 Draggable.prototype.createButton = function(customClass) {
   var button = document.createElement('button');
-  button.classList.add('control-button', customClass);
+  button.classList.add('control-button');
+  button.classList.add(customClass);
   this.node.appendChild(button);
   return button;
 };
