@@ -94,24 +94,15 @@ function DraggableExtended() {
 
   this.extendButtonBehavior = function() {
     var node = this.node;
-    var button = this.extendButton;
     var extended = false;
-    var nodeLastPositon;
 
     var extend = function() {
-      if (!extended) {
-        nodeLastPositon = {
-          top: node.style.top,
-          left: node.style.left
-        };
-      }
-
-      node.style.width = !extended ? (window.innerWidth - 2 + 'px') : '';
-      node.style.height = !extended ? (window.innerHeight - 2 + 'px') : '';
+      node.style.width = !extended ? (window.innerWidth  + 'px') : '';
+      node.style.height = !extended ? (window.innerHeight  + 'px') : '';
       !extended ? node.classList.add('extended') : node.classList.remove('extended');
       extended = !extended;
     };
 
-    button.addEventListener('click', extend);
+    this.extendButton.addEventListener('click', extend);
   };
 }

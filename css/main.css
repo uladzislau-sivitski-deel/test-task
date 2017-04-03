@@ -68,5 +68,6 @@
 .extended{
   top: 0 !important;
   left: 0 !important;
+  border: none;
   z-index: 2;
 }
