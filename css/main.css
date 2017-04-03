@@ -3,12 +3,17 @@
     width: 150px;
 }
 
-.circle {
+.button {
     height: 50px;
     width: 50px;
     outline: none;
     border: 1px solid black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+.item{
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
 }
 
 .pressed {
@@ -38,20 +43,30 @@
     background-color: darkred;
 }
 
-.close-button {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  left: calc(50% - 40px);
-  top: calc(50% - 40px);
-  background-color: darkblue;
-}
-
-.extend-button {
+.control-button {
   height: 20px;
   width: 20px;
-  position: absolute;
-  left: calc(50% - 30px);
-  top: calc(50% - 30px);
-  background-color: darkgreen;
+  margin: 2px;
+}
+
+.close-button::before{
+  content: "\2716";
+  font-size: 18px;
+  position: relative;
+  top: -6px;
+  left: -5px;
+
+}
+.extend-button::before{
+  content: "\2750";
+  font-size: 18px;
+  position: relative;
+  top: -6px;
+  left: -5px;
+}
+
+.extended{
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 2;
 }

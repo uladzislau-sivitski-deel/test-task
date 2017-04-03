@@ -18,9 +18,6 @@ function addButtonFunctionalityBehavior() {
 
 }
 
-
-
-
 function Draggable() {}
 
 inherit(DraggableExtended, Draggable);
@@ -29,7 +26,7 @@ function DraggableExtended(){
 
   this.applyExtendedBehavior = function(){
     this.node.classList.add('draggable-extended');
-    this.extendButton = this.createButton('extend-button', this.closeButton);
+    this.extendButton = this.createButton('extend-button');
     this.extendButtonBehavior();
   };
 
@@ -49,10 +46,7 @@ function DraggableExtended(){
 
       node.style.width = !extended ? (window.innerWidth - 2 + 'px') : '';
       node.style.height = !extended ? (window.innerHeight - 2 + 'px') : '';
-      node.style.borderRadius = !extended ? (0 + 'px') : '';
-      node.style.zIndex = !extended ? 2 : '';
-      node.style.top  = !extended ? (0 + 'px') : nodeLastPositon.top;
-      node.style.left  = !extended ? (0 + 'px') : nodeLastPositon.left;
+      !extended ? node.classList.add('extended') : node.classList.remove('extended');
       extended = !extended;
     };
 
@@ -63,10 +57,10 @@ function DraggableExtended(){
 
 Draggable.prototype.createAndAppendNode = function(){
   this.node = document.createElement('div');
-  this.node.classList.add('draggable', 'circle');
+  this.node.classList.add('draggable', 'item');
   document.querySelector('.content-container').appendChild(this.node);
   this.applyDraggableBehaviour();
-  this.closeButton = this.createButton('close-button', this.node);
+  this.closeButton = this.createButton('close-button');
   this.closeButtonBehavior();
 };
 
@@ -77,11 +71,11 @@ Draggable.prototype.closeButtonBehavior = function(){
   });
 }
 
-Draggable.prototype.createButton = function(customClass, parent){
+Draggable.prototype.createButton = function(customClass){
   var button = document.createElement('button');
-  button.classList.add('circle', customClass);
+  button.classList.add('control-button', customClass);
   addPressBehaviorToButton(button);
-  parent.appendChild(button);
+  this.node.appendChild(button);
   return button;
 };
 
