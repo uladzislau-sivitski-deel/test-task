@@ -1,14 +1,11 @@
 .button-container {
-    margin: 0 auto;
-    font-size: 0;
-    width: 300px;
+    margin: 10px 0 10px 0;
+    width: 150px;
 }
 
-.button {
-    height: 100px;
-    width: 100px;
-    margin: 20px;
-    border-radius: 50%;
+.circle {
+    height: 50px;
+    width: 50px;
     outline: none;
     border: 1px solid black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
@@ -23,21 +20,38 @@
 }
 
 .draggable {
+    margin: 0;
     display: inline-block;
     position: absolute;
-    height: 100px;
-    width: 100px;
-    margin: 20px;
-    border-radius: 50%;
-    outline: none;
-    border: 1px solid black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background-color: lightseagreen;
+}
+
+.draggable-extended {
+  background-color: darkred;
 }
 
 .draggable-button {
     background-color: lightseagreen;
 }
 
-.extended-button {
+.draggable-extended-button {
     background-color: darkred;
+}
+
+.close-button {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
+  background-color: darkblue;
+}
+
+.extend-button {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: calc(50% - 30px);
+  background-color: darkgreen;
 }
