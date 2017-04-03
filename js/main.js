@@ -1,5 +1,4 @@
 window.addEventListener('load', function load(event) {
-  addButtonPressBehavior();
   addButtonFunctionalityBehavior();
 });
 
@@ -20,61 +19,27 @@ function addButtonFunctionalityBehavior() {
 
 function Draggable() {}
 
-inherit(DraggableExtended, Draggable);
-
-function DraggableExtended(){
-
-  this.applyExtendedBehavior = function(){
-    this.node.classList.add('draggable-extended');
-    this.extendButton = this.createButton('extend-button');
-    this.extendButtonBehavior();
-  };
-
-  this.extendButtonBehavior = function(){
-    var button = this.extendButton;
-    var node = this.node;
-    var extended = false;
-    var nodeLastPositon;
-
-    var extend = function(){
-      if(!extended){
-        nodeLastPositon = {
-         top: node.style.top,
-         left: node.style.left
-       };
-      }
-
-      node.style.width = !extended ? (window.innerWidth - 2 + 'px') : '';
-      node.style.height = !extended ? (window.innerHeight - 2 + 'px') : '';
-      !extended ? node.classList.add('extended') : node.classList.remove('extended');
-      extended = !extended;
-    };
-
-    button.addEventListener('click', extend);
-  };
-}
-
-
-Draggable.prototype.createAndAppendNode = function(){
+Draggable.prototype.createAndAppendNode = function() {
   this.node = document.createElement('div');
   this.node.classList.add('draggable', 'item');
   document.querySelector('.content-container').appendChild(this.node);
+
   this.applyDraggableBehaviour();
+
   this.closeButton = this.createButton('close-button');
   this.closeButtonBehavior();
 };
 
-Draggable.prototype.closeButtonBehavior = function(){
+Draggable.prototype.closeButtonBehavior = function() {
   var node = this.node;
-  this.closeButton.addEventListener('click', function(){
+  this.closeButton.addEventListener('click', function() {
     node.remove();
   });
-}
+};
 
-Draggable.prototype.createButton = function(customClass){
+Draggable.prototype.createButton = function(customClass) {
   var button = document.createElement('button');
   button.classList.add('control-button', customClass);
-  addPressBehaviorToButton(button);
   this.node.appendChild(button);
   return button;
 };
@@ -85,7 +50,6 @@ Draggable.prototype.applyDraggableBehaviour = function() {
   var delta;
 
   var drag = function(e) {
-
     delta = {
       x: e.pageX - mouseCoordinates.x,
       y: e.pageY - mouseCoordinates.y
@@ -113,23 +77,41 @@ Draggable.prototype.applyDraggableBehaviour = function() {
   });
 };
 
-function inherit(child, parent){
+function inherit(child, parent) {
   child.prototype = Object.create(parent.prototype);
   child.prototype.constructor = child;
 }
 
-// custom button press
-function addButtonPressBehavior() {
-  document.querySelectorAll('button').forEach(function(button) {
-    addPressBehaviorToButton(button);
-  });
-}
+inherit(DraggableExtended, Draggable);
 
-function addPressBehaviorToButton(button) {
-    button.addEventListener('mousedown', function(e) {
-      e.target.classList.add('pressed');
-    });
-    button.addEventListener('mouseup', function(e) {
-      e.target.classList.remove('pressed');
-    });
+function DraggableExtended() {
+
+  this.applyExtendedBehavior = function() {
+    this.node.classList.add('draggable-extended');
+    this.extendButton = this.createButton('extend-button');
+    this.extendButtonBehavior();
+  };
+
+  this.extendButtonBehavior = function() {
+    var node = this.node;
+    var button = this.extendButton;
+    var extended = false;
+    var nodeLastPositon;
+
+    var extend = function() {
+      if (!extended) {
+        nodeLastPositon = {
+          top: node.style.top,
+          left: node.style.left
+        };
+      }
+
+      node.style.width = !extended ? (window.innerWidth - 2 + 'px') : '';
+      node.style.height = !extended ? (window.innerHeight - 2 + 'px') : '';
+      !extended ? node.classList.add('extended') : node.classList.remove('extended');
+      extended = !extended;
+    };
+
+    button.addEventListener('click', extend);
+  };
 }
