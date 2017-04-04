@@ -17,23 +17,25 @@ function addButtonFunctionalityBehavior() {
 
 }
 
-function Draggable() {}
+function Draggable() {
+  this.nodes = []
+}
 
 Draggable.prototype.createAndAppendNode = function() {
-  this.node = document.createElement('div');
+  var node = document.createElement('div');
+  this.nodes.push(node);
   //classList.add(class1, class2) don't work in IE
-  this.node.classList.add('draggable');
-  this.node.classList.add('item');
-  document.querySelector('.content-container').appendChild(this.node);
+  node.classList.add('draggable');
+  node.classList.add('item');
+  document.querySelector('.content-container').appendChild(node);
 
-  this.applyDraggableBehaviour();
+  this.applyDraggableBehaviour(node);
 
-  this.closeButton = this.createButton('close-button');
-  this.closeButtonBehavior();
+  var closeButton = this.createButton('close-button', node);
+  this.closeButtonBehavior(node, closeButton);
 };
 
-Draggable.prototype.closeButtonBehavior = function() {
-  var node = this.node;
+Draggable.prototype.closeButtonBehavior = function(node, button) {
   //polyfill for remove in IE
   if (!('remove' in Element.prototype)) {
     Element.prototype.remove = function() {
@@ -42,21 +44,20 @@ Draggable.prototype.closeButtonBehavior = function() {
         }
     };
 }
-  this.closeButton.addEventListener('click', function() {
+  button.addEventListener('click', function() {
     node.remove();
   });
 };
 
-Draggable.prototype.createButton = function(customClass) {
+Draggable.prototype.createButton = function(customClass, parent) {
   var button = document.createElement('button');
   button.classList.add('control-button');
   button.classList.add(customClass);
-  this.node.appendChild(button);
+  parent.appendChild(button);
   return button;
 };
 
-Draggable.prototype.applyDraggableBehaviour = function() {
-  var node = this.node;
+Draggable.prototype.applyDraggableBehaviour = function(node) {
   var mouseCoordinates;
   var delta;
 
@@ -96,15 +97,17 @@ function inherit(child, parent) {
 inherit(DraggableExtended, Draggable);
 
 function DraggableExtended() {
+  this.nodes = [];
 
   this.applyExtendedBehavior = function() {
-    this.node.classList.add('draggable-extended');
-    this.extendButton = this.createButton('extend-button');
-    this.extendButtonBehavior();
+    var node = this.nodes[this.nodes.length - 1];
+    node.classList.add('draggable-extended');
+
+    var extendButton = this.createButton('extend-button', node);
+    this.extendButtonBehavior(node, extendButton);
   };
 
-  this.extendButtonBehavior = function() {
-    var node = this.node;
+  this.extendButtonBehavior = function(node, button) {
     var extended = false;
 
     var extend = function() {
@@ -114,6 +117,6 @@ function DraggableExtended() {
       extended = !extended;
     };
 
-    this.extendButton.addEventListener('click', extend);
+    button.addEventListener('click', extend);
   };
 }
